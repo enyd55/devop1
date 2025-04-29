@@ -1,1 +1,36 @@
-hi
+pipeline {
+    agent any
+
+    environment {
+        GIT_REPO_URL = 'https://github.com/enyd55/devop1.git'
+        XAMPP_PATH = 'C:\\xampp\\htdocs' // Your local XAMPP path
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git url: "${GIT_REPO_URL}"
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                bat """
+                copy file1.html ${XAMPP_PATH}\\file1.html
+                copy file2.html ${XAMPP_PATH}\\file2.html
+                copy file3.html ${XAMPP_PATH}\\file3.html
+                """
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Deployment successful!'
+        }
+        failure {
+            echo 'Deployment failed.'
+        }
+    }
+}
+
