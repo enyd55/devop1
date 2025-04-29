@@ -1,1 +1,37 @@
 hello
+@@@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@@@
+
+save credentials in jenkins using ID github-creds
+
+node {
+    // Define the location of the XAMPP server (for Windows)
+    def xamppPath = 'C:\\xampp\\htdocs\\'  // Path for XAMPP on Windows
+    
+    // GitHub repository URL
+    def repoUrl = 'https://github.com/enyd55/devop1.git'
+    
+    // GitHub credentials ID
+    def credentialsId = 'github-creds' // Use the correct credentials ID
+
+    stage('Clone Repository') {
+        // Checkout the GitHub repository containing the HTML files
+        git branch: 'master', url: repoUrl, credentialsId: credentialsId
+    }
+
+    stage('Deploy to XAMPP') {
+        // Copy the files from the GitHub repository to XAMPP server's htdocs directory
+        bat """
+        copy file1.html ${xamppPath}
+        copy file2.html ${xamppPath}
+        copy file3.html ${xamppPath}
+        """
+    }
+
+    stage('Test Deployment') {
+        // Optional: Test that the deployment was successful
+        // This can be done by running curl or wget commands
+        bat """
+        curl http://localhost/file1.html
+        """
+    }
+}
