@@ -1,0 +1,15 @@
+docker pull ubuntu
+docker run -it ubuntu
+
+  echo "This is a file inside Ubuntu container" > /myfile.txt
+  cat /myfile.txt
+  exit
+
+docker ps -a
+docker commit e176d4ef01a7 Namrata055/ubuntu-custom:latest
+docker login
+docker tag Namrata055/ubuntu-custom:latest docker.io/namrata055/ubuntu-custom:latest
+docker push docker.io/namrata055/ubuntu-custom:latest
+
+docker pull namrata055/ubuntu-custom:latest
+
