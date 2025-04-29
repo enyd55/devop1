@@ -38,3 +38,37 @@ node {
         """
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+node {
+    def xamppPath = 'C:\\xampp\\htdocs\\'  // XAMPP path for Windows
+    def repoUrl = 'https://github.com/enyd55/devop1.git'
+    def credentialsId = 'github-creds'  // GitHub credentials ID
+
+    stage('Clone and Deploy') {
+        git branch: 'master', url: repoUrl, credentialsId: credentialsId
+        bat """
+        copy file1.html ${xamppPath}
+        copy file2.html ${xamppPath}
+        copy file3.html ${xamppPath}
+        """
+    }
+
+    stage('Test Deployment') {
+        bat 'curl http://localhost/file1.html'
+    }
+}
+
