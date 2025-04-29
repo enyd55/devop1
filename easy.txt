@@ -1,0 +1,38 @@
+pip install selenium
+
+python test.py
+
+from selenium import webdriver
+import time
+
+# Open Chrome
+driver = webdriver.Chrome()
+
+# Go to a website
+driver.get("https://example.com")
+
+# Wait for 5 seconds
+time.sleep(5)
+
+# Close the browser
+driver.quit()
+
+
+
+
+-------------------------------------------
+
+from selenium import webdriver
+import time
+
+# Open Chrome
+driver = webdriver.Chrome()
+
+# Go to a website
+driver.get("https://github.com")
+
+# Wait for 5 seconds
+time.sleep(5)
+
+# Close the browser
+driver.quit()
